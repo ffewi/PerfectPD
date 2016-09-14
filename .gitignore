@@ -1,3 +1,6 @@
 *.class
 .settings/
 /target/
+.classpath
+.settings/
+target/
