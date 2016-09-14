@@ -3,5 +3,61 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+	<display-name>My secondGoal</display-name>
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- 容器初始化加载配置文件 -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:config/spring-*.xml</param-value>
+		</init-param>
+		<!-- load-on-startup标记容器是否在启动的时候实例化并调用其init()方法的优先级。 它的值表示servlet应该被载入的顺序 
+			当值为0或者大于0时，表示容器在应用启动时就加载并初始化这个servlet； 如果值小于0或未指定时，则表示只有在第一次请求的容器才在该servlet调用初始化函数 
+			正值越小，servlet的优先级越高，应用启动时就越先加载。 值相同时，容器就会自己选择顺序来加载。 -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<!-- 解决post请求乱码 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+
+	<!-- /根下所有post均实行上面字符编码要求 -->
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/</url-pattern>
+	</filter-mapping>
+
+	<!-- 设置请求对应响应错误返回页面 -->
+	<error-page>
+		<error-code>400</error-code>
+		<location>/400.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/403.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/500.jsp</location>
+	</error-page>
 </web-app>
