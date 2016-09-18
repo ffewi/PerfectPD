@@ -60,4 +60,11 @@
 		<error-code>500</error-code>
 		<location>/500.jsp</location>
 	</error-page>
+	
+	<!-- jia zai ri zhi -->
+	<listener> 
+    <description>ServletContextListener</description> 
+    <listener-class>com.cn.ffewi.filter.ContextInitListener</listener-class> 
+	</listener>
+	
 </web-app>
